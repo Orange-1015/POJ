@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef struct node;
+typedef node *bitree;
+struct node{
+	char data;
+	bitree lchild,rchild;
+};
+bitree bt;
+void pre_crt(bitree &bt){
+	char ch;
+	ch=getchar();
+	if(ch!='.'){
+		bt=new(node);
+		bt->data=ch;
+		pre_crt(bt->lchild);
+		pre_crt(bt->rchild);
+	}else bt=NULL;
+}
+void midorder(bitree bt){
+	if(bt->data == '#') return;
+	midorder(bt->lchild);
+	cout << bt->data;
+	midorder(bt->rchild);
+}
+void backorder(bitree bt){
+	if(bt->data == '#') return;
+	midorder(bt->lchild);
+	midorder(bt->rchild);
+	cout << bt->data;
+}
+int main(){
+  bitree bt;
+	pre_crt(bt);
+  midorder(bt);
+  cout << '\n';
+  backorder(bt);
+  return 0;
+}
